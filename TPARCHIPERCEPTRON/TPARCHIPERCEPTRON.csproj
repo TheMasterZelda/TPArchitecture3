@@ -47,41 +47,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmAffichageDessins.cs">
+    <Compile Include="GUI\frmAffichageDessins.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAffichageDessins.Designer.cs">
+    <Compile Include="GUI\frmAffichageDessins.Designer.cs">
       <DependentUpon>frmAffichageDessins.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAnalyseEcriture.cs">
+    <Compile Include="GUI\frmAnalyseEcriture.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAnalyseEcriture.Designer.cs">
+    <Compile Include="GUI\frmAnalyseEcriture.Designer.cs">
       <DependentUpon>frmAnalyseEcriture.cs</DependentUpon>
     </Compile>
-    <Compile Include="GestionClassesPerceptrons.cs" />
-    <Compile Include="CoordDessin.cs" />
-    <Compile Include="GestionFichiersSorties.cs" />
-    <Compile Include="Perceptron.cs" />
+    <Compile Include="BLL\GestionClassesPerceptrons.cs" />
+    <Compile Include="BLL\CoordDessin.cs" />
+    <Compile Include="DAL\GestionFichiersSorties.cs" />
+    <Compile Include="BLL\Perceptron.cs" />
     <Compile Include="CstApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ucZoneDessin.cs">
+    <Compile Include="GUI\ucZoneDessin.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucZoneDessin.Designer.cs">
+    <Compile Include="GUI\ucZoneDessin.Designer.cs">
       <DependentUpon>ucZoneDessin.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmAffichageDessins.en.resx">
+    <EmbeddedResource Include="GUI\frmAffichageDessins.en.resx">
       <DependentUpon>frmAffichageDessins.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAffichageDessins.resx">
+    <EmbeddedResource Include="GUI\frmAffichageDessins.resx">
       <DependentUpon>frmAffichageDessins.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAnalyseEcriture.en.resx">
+    <EmbeddedResource Include="GUI\frmAnalyseEcriture.en.resx">
       <DependentUpon>frmAnalyseEcriture.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAnalyseEcriture.resx">
+    <EmbeddedResource Include="GUI\frmAnalyseEcriture.resx">
       <DependentUpon>frmAnalyseEcriture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -94,7 +94,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ucZoneDessin.resx">
+    <EmbeddedResource Include="GUI\ucZoneDessin.resx">
       <DependentUpon>ucZoneDessin.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
@@ -108,7 +108,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\Apprentissage.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

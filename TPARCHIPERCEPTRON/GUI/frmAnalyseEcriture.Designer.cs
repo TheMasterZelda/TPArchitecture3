@@ -57,10 +57,10 @@
             // 
             // grpEntrainement
             // 
-            resources.ApplyResources(this.grpEntrainement, "grpEntrainement");
             this.grpEntrainement.Controls.Add(this.lblValeurEntraine);
             this.grpEntrainement.Controls.Add(this.txtValeurEntrainee);
             this.grpEntrainement.Controls.Add(this.btnEntrainement);
+            resources.ApplyResources(this.grpEntrainement, "grpEntrainement");
             this.grpEntrainement.Name = "grpEntrainement";
             this.grpEntrainement.TabStop = false;
             // 
@@ -83,9 +83,9 @@
             // 
             // grpDessinEntrainement
             // 
-            resources.ApplyResources(this.grpDessinEntrainement, "grpDessinEntrainement");
             this.grpDessinEntrainement.Controls.Add(this.btnEffacer);
             this.grpDessinEntrainement.Controls.Add(this.ucDessin);
+            resources.ApplyResources(this.grpDessinEntrainement, "grpDessinEntrainement");
             this.grpDessinEntrainement.Name = "grpDessinEntrainement";
             this.grpDessinEntrainement.TabStop = false;
             // 
@@ -98,17 +98,17 @@
             // 
             // ucDessin
             // 
-            resources.ApplyResources(this.ucDessin, "ucDessin");
             this.ucDessin.BackColor = System.Drawing.Color.White;
             this.ucDessin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.ucDessin, "ucDessin");
             this.ucDessin.Name = "ucDessin";
             // 
             // grpTests
             // 
-            resources.ApplyResources(this.grpTests, "grpTests");
             this.grpTests.Controls.Add(this.lblValeurTestee);
             this.grpTests.Controls.Add(this.txtValeurTestee);
             this.grpTests.Controls.Add(this.btnTest);
+            resources.ApplyResources(this.grpTests, "grpTests");
             this.grpTests.Name = "grpTests";
             this.grpTests.TabStop = false;
             // 
@@ -132,21 +132,22 @@
             // 
             // mnuPrincipal
             // 
-            resources.ApplyResources(this.mnuPrincipal, "mnuPrincipal");
             this.mnuPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiLangue,
             this.tsmiAfficherDessins});
+            resources.ApplyResources(this.mnuPrincipal, "mnuPrincipal");
             this.mnuPrincipal.Name = "mnuPrincipal";
             // 
             // tsmiLangue
             // 
-            resources.ApplyResources(this.tsmiLangue, "tsmiLangue");
             this.tsmiLangue.Name = "tsmiLangue";
+            resources.ApplyResources(this.tsmiLangue, "tsmiLangue");
+            this.tsmiLangue.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.tsmiLangue_DropDownItemClicked);
             // 
             // tsmiAfficherDessins
             // 
-            resources.ApplyResources(this.tsmiAfficherDessins, "tsmiAfficherDessins");
             this.tsmiAfficherDessins.Name = "tsmiAfficherDessins";
+            resources.ApplyResources(this.tsmiAfficherDessins, "tsmiAfficherDessins");
             this.tsmiAfficherDessins.Click += new System.EventHandler(this.tsmiAfficherDessins_Click);
             // 
             // frmAnalyseEcriture

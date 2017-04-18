@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using TPARCHIPERCEPTRON.BLL;
 
 namespace TPARCHIPERCEPTRON
 {

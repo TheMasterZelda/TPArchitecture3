@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using TPARCHIPERCEPTRON.DAL;
 
-namespace TPARCHIPERCEPTRON
+namespace TPARCHIPERCEPTRON.BLL
 {
     /// <summary>
     /// Gère les fonctionnalités de l'application. Entre autre, permet de :

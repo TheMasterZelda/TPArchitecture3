@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Linq;
 using System.ComponentModel;
 using System.Collections.Generic;
+using TPARCHIPERCEPTRON.BLL;
+using System.Threading;
 
 namespace TPARCHIPERCEPTRON
 {
@@ -110,6 +112,7 @@ namespace TPARCHIPERCEPTRON
             AjouterLangue(CultureInfo.GetCultureInfo("fr"));
             AjouterLangue(CultureInfo.GetCultureInfo("en"));
             _langues[0].Checked = true;
+            _langueCourante = _langues[0];
         }
 
         /// <summary>
@@ -137,6 +140,49 @@ namespace TPARCHIPERCEPTRON
             // Amener la fenêtre existante ou nouvellement crée
             // en avant-plan.
             _instanceDessinsForm.BringToFront();
+        }
+
+        private void tsmiLangue_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem != _langueCourante)
+            {
+                if (!_changementLangueCourante)
+                {
+                    _changementLangueCourante = true;
+                    _langues[_langues.IndexOf(_langueCourante)].Checked = false;
+
+                    _langues[_langues.IndexOf((ToolStripMenuItem)e.ClickedItem)].Checked = true;
+                    _langueCourante = (ToolStripMenuItem)e.ClickedItem;
+
+                    CultureInfo c = (CultureInfo)e.ClickedItem.Tag;
+                    ChangerLangue(c);
+                    _changementLangueCourante = false;
+                }
+            }
+        }
+        private void ChangerLangue(CultureInfo cul)
+        {
+            Thread.CurrentThread.CurrentUICulture = cul;
+            Thread.CurrentThread.CurrentCulture = cul;
+
+            ComponentResourceManager res = new ComponentResourceManager(typeof(frmAnalyseEcriture));
+            res.ApplyResources(this, "$this", cul);
+            foreach (Control con in this.Controls)
+            {
+                res.ApplyResources(con, con.Name, cul);
+                foreach (Control con2 in con.Controls)
+                {
+                    res.ApplyResources(con2, con2.Name, cul);
+                }
+                if (con.GetType() == mnuPrincipal.GetType())
+                {
+                    foreach (var item in ((MenuStrip)con).Items)
+                    {
+                        res.ApplyResources(item, ((ToolStripMenuItem)item).Name, cul);
+
+                    }
+                }
+            }
         }
     }
 }

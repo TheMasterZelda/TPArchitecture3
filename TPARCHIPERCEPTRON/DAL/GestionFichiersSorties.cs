@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using TPARCHIPERCEPTRON.BLL;
 
-namespace TPARCHIPERCEPTRON
+namespace TPARCHIPERCEPTRON.DAL
 {
     /// <summary>
     /// Cette classe gère l'accès aux disques pour le fichiers d'apprentissages. 
