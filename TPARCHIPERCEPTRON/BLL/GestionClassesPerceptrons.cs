@@ -24,7 +24,7 @@ namespace TPARCHIPERCEPTRON.BLL
             _gestionSortie = new GestionFichiersSorties();
 
             //À COMPLÉTER
-
+            _gestionSortie.ChargerCoordonnees();
         }
 
         /// <summary>
@@ -33,6 +33,8 @@ namespace TPARCHIPERCEPTRON.BLL
         public void ChargerCoordonnees()
         {
             //À COMPLÉTER
+            _gestionSortie.ChargerCoordonnees();
+
         }
 
         /// <summary>
@@ -60,12 +62,13 @@ namespace TPARCHIPERCEPTRON.BLL
                 _lstPerceptrons.Add(reponse, new Perceptron(reponse));
             }
             coordo.Reponse = reponse;
-            List<CoordDessin> lstCoord = new List<CoordDessin>();
+            List<CoordDessin> lstCoord = ObtenirCoordonnees() as List<CoordDessin>;//new List<CoordDessin>();
             lstCoord.Add(coordo);
             foreach (var c in _lstPerceptrons)
             {
                 sConsole += _lstPerceptrons[reponse].Entrainement(lstCoord);
             }
+            _gestionSortie.SauvegarderCoordonnees(lstCoord);
             return sConsole;
         }
 

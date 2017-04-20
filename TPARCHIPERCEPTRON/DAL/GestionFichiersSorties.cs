@@ -46,13 +46,14 @@ namespace TPARCHIPERCEPTRON.DAL
                 {
                     sLigne = sr.ReadLine();
                     sTabElement = sLigne.Split('\t');
-                    CoordDessin cd = new CoordDessin(CstApplication.LARGEURTRAIT, CstApplication.HAUTEURTRAIT);
-                    for (int x = 0; x < CstApplication.NOMBRE_BITS_X; x++)
+                    CoordDessin cd = new CoordDessin(CstApplication.TAILLEDESSINY, CstApplication.TAILLEDESSINX);
+
+                    for (int y = 0; y < CstApplication.NOMBRE_BITS_Y; y++)
                     {
-                        for (int y = 0; y < CstApplication.NOMBRE_BITS_Y; y++)
+                        for (int x = 0; x < CstApplication.NOMBRE_BITS_X; x++)
                         {
-                            if (Convert.ToInt32(sTabElement[x + (CstApplication.NOMBRE_BITS_X * y)]) == CstApplication.VRAI)
-                                cd.AjouterCoordonnees(x, y, CstApplication.LARGEURTRAIT, CstApplication.HAUTEURTRAIT);
+                            if (Convert.ToInt32(sTabElement[x + (CstApplication.NOMBRE_BITS_X * y)]) == CstApplication.FAUX)
+                                cd.AjouterCoordonnees(x*CstApplication.LARGEURTRAIT, y*CstApplication.HAUTEURTRAIT, CstApplication.LARGEURTRAIT, CstApplication.HAUTEURTRAIT);
                         }
                     }
                     cd.Reponse = sTabElement[sTabElement.Length - 1];
@@ -82,12 +83,14 @@ namespace TPARCHIPERCEPTRON.DAL
 
                     foreach (bool bit in cd.BitArrayDessin)
                     {
-                        sLigne += bit ? CstApplication.VRAI : CstApplication.FAUX;
+                        sLigne += bit ? CstApplication.FAUX : CstApplication.VRAI;
                         sLigne += "\t";
                     }
                     sLigne += cd.Reponse;
                     sw.WriteLine(sLigne);
                 }
+
+                sw.Close();
 
                 return CstApplication.OK;
             }

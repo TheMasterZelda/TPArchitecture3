@@ -44,6 +44,7 @@ namespace TPARCHIPERCEPTRON
 
             _gcpAnalyseEcriture = new GestionClassesPerceptrons();
             //À COMPLÉTER   
+            _gcpAnalyseEcriture.ChargerCoordonnees();
         }
 
 
