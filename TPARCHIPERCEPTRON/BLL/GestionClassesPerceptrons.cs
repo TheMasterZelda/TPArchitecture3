@@ -24,14 +24,13 @@ namespace TPARCHIPERCEPTRON.BLL
             _gestionSortie = new GestionFichiersSorties();
 
             //À COMPLÉTER
-            
+
         }
 
         /// <summary>
         /// Charge les échantillons d'apprentissage sauvegardé sur le disque.
         /// </summary>
-        /// <param name="fichier">Le nom du fichier</param>
-        public void ChargerCoordonnees(string fichier)
+        public void ChargerCoordonnees()
         {
             //À COMPLÉTER
         }
@@ -39,9 +38,8 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <summary>
         /// Sauvegarde les échantillons d'apprentissage sauvegardé sur le disque.
         /// </summary>
-        /// <param name="fichier">Le nom du fichier</param>
         /// <returns>En cas d'erreur retourne le code d'erreur</returns>
-        public int SauvegarderCoordonnees(string fichier)
+        public int SauvegarderCoordonnees()
         {
             int erreur = CstApplication.ERREUR;
             //À COMPLÉTER
@@ -57,7 +55,17 @@ namespace TPARCHIPERCEPTRON.BLL
         public string Entrainement(CoordDessin coordo, string reponse)
         {
             string sConsole = "";
-
+            if (!_lstPerceptrons.ContainsKey(reponse))
+            {
+                _lstPerceptrons.Add(reponse, new Perceptron(reponse));
+            }
+            coordo.Reponse = reponse;
+            List<CoordDessin> lstCoord = new List<CoordDessin>();
+            lstCoord.Add(coordo);
+            foreach (var c in _lstPerceptrons)
+            {
+                sConsole += _lstPerceptrons[reponse].Entrainement(lstCoord);
+            }
             return sConsole;
         }
 
