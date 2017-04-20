@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Windows.Forms;
 using TPARCHIPERCEPTRON.BLL;
 
 namespace TPARCHIPERCEPTRON.DAL
@@ -60,7 +61,7 @@ namespace TPARCHIPERCEPTRON.DAL
                     _lstCoord.Add(cd);
                 }
             }
-            //À COMPLÉTER
+
             return _lstCoord;
         }
 
@@ -96,6 +97,7 @@ namespace TPARCHIPERCEPTRON.DAL
             }
             catch (Exception ex)
             {
+                MessageBox.Show("erreur");
                 return CstApplication.ERREUR;
             }
         }

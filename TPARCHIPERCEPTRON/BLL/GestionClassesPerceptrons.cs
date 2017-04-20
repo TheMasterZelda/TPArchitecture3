@@ -66,7 +66,7 @@ namespace TPARCHIPERCEPTRON.BLL
             lstCoord.Add(coordo);
             foreach (var c in _lstPerceptrons)
             {
-                sConsole += _lstPerceptrons[reponse].Entrainement(lstCoord);
+                sConsole += c.Value.Entrainement(lstCoord);
             }
             _gestionSortie.SauvegarderCoordonnees(lstCoord);
             return sConsole;
@@ -81,6 +81,12 @@ namespace TPARCHIPERCEPTRON.BLL
         public string TesterPerceptron(CoordDessin coord)
         {
             string resultat = "";
+
+            foreach (var p in _lstPerceptrons)
+            {
+                if (p.Value.TesterNeurone(coord))
+                    resultat += p.Key;
+            }
 
             if (resultat == "")
                 resultat = "?";

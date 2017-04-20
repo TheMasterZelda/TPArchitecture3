@@ -67,7 +67,7 @@ namespace TPARCHIPERCEPTRON
         private void btnTest_Click(object sender, EventArgs e)
         {
             //À COMPLÉTER
-            _gcpAnalyseEcriture.TesterPerceptron(ucDessin.Coordonnees);
+            txtValeurTestee.Text = _gcpAnalyseEcriture.TesterPerceptron(ucDessin.Coordonnees);
         }
 
         /// <summary>

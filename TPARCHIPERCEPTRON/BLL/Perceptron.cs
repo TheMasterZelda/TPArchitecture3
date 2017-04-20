@@ -105,7 +105,7 @@ namespace TPARCHIPERCEPTRON.BLL
                 sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.FAUX : CstApplication.VRAI);
             }
 
-            return (sum >= 0) ? true : false;
+            return (sum >= 0) ? false : true;
         }
 
     }
