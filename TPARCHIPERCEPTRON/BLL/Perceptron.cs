@@ -39,7 +39,7 @@ namespace TPARCHIPERCEPTRON.BLL
             string resultat = "";
             int iNbIterration = 0;
             int iNbErreur = 0;
-            int iTaillePoid = CstApplication.NOMBRE_BITS_X * CstApplication.NOMBRE_BITS_Y;
+            int iTaillePoid = (CstApplication.NOMBRE_BITS_X * CstApplication.NOMBRE_BITS_Y) + 1;
             _poidsSyn = new double[iTaillePoid];
 
             for (int i = 0; i < iTaillePoid; i++)
@@ -82,11 +82,11 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns>Vrai ou faux</returns>
         public int ValeurEstime(double[] vecteurSyn, BitArray entree)
         {
-            double sum = _poidsSyn[0];
+            double sum = vecteurSyn[0];
 
             for (int i = 1; i < vecteurSyn.Length; i++)
             {
-                sum += _poidsSyn[i] * (entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
+                sum += vecteurSyn[i] * (entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
             }
             return (sum >= 0) ? 1 : 0;
         }
@@ -98,8 +98,14 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns></returns>
         public bool TesterNeurone(CoordDessin coord)
         {
-            //À COMPLÉTER
-            return CstApplication.VRAI == CstApplication.VRAI ? true : false;
+            double sum = _poidsSyn[0];
+
+            for (int i = 1; i < _poidsSyn.Length; i++)
+            {
+                sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
+            }
+
+            return (sum >= 0) ? true : false;
         }
 
     }
