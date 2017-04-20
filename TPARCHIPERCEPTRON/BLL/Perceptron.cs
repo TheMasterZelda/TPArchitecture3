@@ -53,7 +53,7 @@ namespace TPARCHIPERCEPTRON.BLL
                 foreach (var c in lstCoord)
                 {
                     int iValeurEstime = ValeurEstime(_poidsSyn, c.BitArrayDessin);
-                    int iVraieValeur = c.Reponse == _reponse ? CstApplication.VRAI : CstApplication.FAUX;
+                    int iVraieValeur = c.Reponse == _reponse ? CstApplication.FAUX : CstApplication.VRAI;
 
                     if (iValeurEstime != iVraieValeur)
                     {
@@ -61,15 +61,15 @@ namespace TPARCHIPERCEPTRON.BLL
                         _poidsSyn[0] += _cstApprentissage * (iVraieValeur - iValeurEstime);
                         for (int j = 1; j < _poidsSyn.Length; j++)
                         {
-                            _poidsSyn[j] += _cstApprentissage * (iVraieValeur - iValeurEstime) * Convert.ToDouble(c.BitArrayDessin[j - 1]);
+                            _poidsSyn[j] += _cstApprentissage * (iVraieValeur - iValeurEstime) * (c.BitArrayDessin[j - 1] ? CstApplication.FAUX : CstApplication.VRAI);
                         }
                     }
-
                 }
-                iNbIterration++;
-            } while (iNbErreur != 0 && iNbIterration < 10000);
 
-            resultat += $"Le pourcentage de réussite est de {(double)(lstCoord.Count - iNbErreur) / (double)(lstCoord.Count * 100.0d)} \r\n";
+                iNbIterration++;
+            } while (iNbErreur != 0 && iNbIterration < 1000);
+
+           resultat += $"Le pourcentage de réussite est de {((double)(lstCoord.Count - iNbErreur) / (double)(lstCoord.Count * 100.0d)) * 10000} \r\n";
 
             return resultat;
         }
@@ -86,9 +86,9 @@ namespace TPARCHIPERCEPTRON.BLL
 
             for (int i = 1; i < vecteurSyn.Length; i++)
             {
-                sum += vecteurSyn[i] * (entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
+                sum += vecteurSyn[i] * (entree[i - 1] ? CstApplication.FAUX : CstApplication.VRAI);
             }
-            return (sum >= 0) ? 1 : 0;
+            return (sum >= 0) ? CstApplication.VRAI : CstApplication.FAUX;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace TPARCHIPERCEPTRON.BLL
 
             for (int i = 1; i < _poidsSyn.Length; i++)
             {
-                sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
+                sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.FAUX : CstApplication.VRAI);
             }
 
             return (sum >= 0) ? true : false;
