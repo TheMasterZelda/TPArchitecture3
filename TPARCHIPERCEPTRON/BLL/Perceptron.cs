@@ -86,8 +86,7 @@ namespace TPARCHIPERCEPTRON.BLL
 
             for (int i = 1; i < vecteurSyn.Length; i++)
             {
-                int convert = entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX;
-                sum += _poidsSyn[i] * convert;
+                sum += _poidsSyn[i] * (entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX);
             }
             return (sum >= 0) ? 1 : 0;
         }
