@@ -24,7 +24,8 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <param name="reponse">La classe que défini le perceptron</param>
         public Perceptron(string reponse)
         {
-            //À COMPLÉTER
+            _cstApprentissage = CstApplication.CONSTANTEAPPRENTISSAGE;
+            _reponse = reponse;
         }
 
         /// <summary>
@@ -34,8 +35,42 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns>Les paramètres de la console</returns>
         public string Entrainement(List<CoordDessin> lstCoord)
         {
+            Random r = new Random();
             string resultat = "";
-            //À COMPLÉTER
+            int iNbIterration = 0;
+            int iNbErreur = 0;
+            int iTaillePoid = CstApplication.NOMBRE_BITS_X * CstApplication.NOMBRE_BITS_Y;
+            _poidsSyn = new double[iTaillePoid];
+
+            for (int i = 0; i < iTaillePoid; i++)
+            {
+                _poidsSyn[i] = r.NextDouble();
+            }
+
+            do
+            {
+                iNbErreur = 0;
+                foreach (var c in lstCoord)
+                {
+                    int iValeurEstime = ValeurEstime(_poidsSyn, c.BitArrayDessin);
+                    int iVraieValeur = c.Reponse == _reponse ? CstApplication.VRAI : CstApplication.FAUX;
+
+                    if (iValeurEstime != iVraieValeur)
+                    {
+                        iNbErreur++;
+                        _poidsSyn[0] += _cstApprentissage * (iVraieValeur - iValeurEstime);
+                        for (int j = 1; j < _poidsSyn.Length; j++)
+                        {
+                            _poidsSyn[j] += _cstApprentissage * (iVraieValeur - iValeurEstime) * Convert.ToDouble(c.BitArrayDessin[j - 1]);
+                        }
+                    }
+
+                }
+                iNbIterration++;
+            } while (iNbErreur != 0 && iNbIterration < 10000);
+
+            resultat += $"Le pourcentage de réussite est de {(double)(lstCoord.Count - iNbErreur) / (double)(lstCoord.Count * 100.0d)} \r\n";
+
             return resultat;
         }
 
@@ -47,7 +82,7 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns>Vrai ou faux</returns>
         public int ValeurEstime(double[] vecteurSyn, BitArray entree)
         {
-            //À COMPLÉTER
+            
             return CstApplication.VRAI;
         }
 
