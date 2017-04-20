@@ -82,8 +82,14 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns>Vrai ou faux</returns>
         public int ValeurEstime(double[] vecteurSyn, BitArray entree)
         {
-            
-            return CstApplication.VRAI;
+            double sum = _poidsSyn[0];
+
+            for (int i = 1; i < vecteurSyn.Length; i++)
+            {
+                int convert = entree[i - 1] ? CstApplication.VRAI : CstApplication.FAUX;
+                sum += _poidsSyn[i] * convert;
+            }
+            return (sum >= 0) ? 1 : 0;
         }
 
         /// <summary>
