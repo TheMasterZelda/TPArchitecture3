@@ -24,7 +24,7 @@ namespace TPARCHIPERCEPTRON.BLL
             _gestionSortie = new GestionFichiersSorties();
 
             //À COMPLÉTER
-            _gestionSortie.ChargerCoordonnees();
+            ChargerCoordonnees();
         }
 
         /// <summary>
@@ -32,9 +32,15 @@ namespace TPARCHIPERCEPTRON.BLL
         /// </summary>
         public void ChargerCoordonnees()
         {
-            //À COMPLÉTER
             _gestionSortie.ChargerCoordonnees();
-
+            List<CoordDessin> lstCoord = ObtenirCoordonnees() as List<CoordDessin>;
+            foreach (CoordDessin cd in lstCoord)
+            {
+                if (!_lstPerceptrons.ContainsKey(cd.Reponse))
+                {
+                    _lstPerceptrons.Add(cd.Reponse, new Perceptron(cd.Reponse));
+                }
+            }
         }
 
         /// <summary>
@@ -43,8 +49,9 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns>En cas d'erreur retourne le code d'erreur</returns>
         public int SauvegarderCoordonnees()
         {
-            int erreur = CstApplication.ERREUR;
             //À COMPLÉTER
+            List<CoordDessin> lstCoord = ObtenirCoordonnees() as List<CoordDessin>;
+            int erreur = _gestionSortie.SauvegarderCoordonnees(lstCoord);
             return erreur;
         }
 
@@ -85,7 +92,7 @@ namespace TPARCHIPERCEPTRON.BLL
             foreach (var p in _lstPerceptrons)
             {
                 if (p.Value.TesterNeurone(coord))
-                    resultat += p.Key;
+                    resultat += p.Key + ' ';
             }
 
             if (resultat == "")

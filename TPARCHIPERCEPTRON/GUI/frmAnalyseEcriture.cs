@@ -88,6 +88,7 @@ namespace TPARCHIPERCEPTRON
         private void frmAnalyseEcriture_FormClosing(object sender, FormClosingEventArgs e)
         {
             //À COMPLÉTER
+            _gcpAnalyseEcriture.SauvegarderCoordonnees();
         }
 
         /// <summary>

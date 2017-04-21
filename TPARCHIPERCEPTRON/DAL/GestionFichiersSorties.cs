@@ -26,14 +26,11 @@ namespace TPARCHIPERCEPTRON.DAL
             string sLigne = "";
             string[] sTabElement;
             int iTailleArray = 0;
-            int iNbCoord = 0;
 
             if (!sr.EndOfStream)
             {
                 sLigne = sr.ReadLine();
                 iTailleArray = Convert.ToInt32(sLigne);
-                sLigne = sr.ReadLine();
-                iNbCoord = Convert.ToInt32(sLigne);
             }
 
             if (iTailleArray != CstApplication.NOMBRE_BITS_X * CstApplication.NOMBRE_BITS_Y)
@@ -41,27 +38,24 @@ namespace TPARCHIPERCEPTRON.DAL
                 return _lstCoord;
             }
 
-            if (!sr.EndOfStream)
+            while (!sr.EndOfStream)
             {
-                for (int i = 0; i < iNbCoord; i++)
-                {
-                    sLigne = sr.ReadLine();
-                    sTabElement = sLigne.Split('\t');
-                    CoordDessin cd = new CoordDessin(CstApplication.TAILLEDESSINY, CstApplication.TAILLEDESSINX);
+                sLigne = sr.ReadLine();
+                sTabElement = sLigne.Split('\t');
+                CoordDessin cd = new CoordDessin(CstApplication.TAILLEDESSINY, CstApplication.TAILLEDESSINX);
 
+                for (int x = 0; x < CstApplication.NOMBRE_BITS_X; x++)
+                {
                     for (int y = 0; y < CstApplication.NOMBRE_BITS_Y; y++)
                     {
-                        for (int x = 0; x < CstApplication.NOMBRE_BITS_X; x++)
-                        {
-                            if (Convert.ToInt32(sTabElement[x + (CstApplication.NOMBRE_BITS_X * y)]) == CstApplication.FAUX)
-                                cd.AjouterCoordonnees(x*CstApplication.LARGEURTRAIT, y*CstApplication.HAUTEURTRAIT, CstApplication.LARGEURTRAIT, CstApplication.HAUTEURTRAIT);
-                        }
+                        if (Convert.ToInt32(sTabElement[y + (CstApplication.NOMBRE_BITS_Y * x)]) == CstApplication.FAUX)
+                            cd.AjouterCoordonnees(x * CstApplication.LARGEURTRAIT, y * CstApplication.HAUTEURTRAIT, CstApplication.LARGEURTRAIT, CstApplication.HAUTEURTRAIT);
                     }
-                    cd.Reponse = sTabElement[sTabElement.Length - 1];
-                    _lstCoord.Add(cd);
                 }
+                cd.Reponse = sTabElement[sTabElement.Length - 1];
+                _lstCoord.Add(cd);
             }
-
+            sr.Close();
             return _lstCoord;
         }
 
@@ -76,7 +70,6 @@ namespace TPARCHIPERCEPTRON.DAL
                 StreamWriter sw = new StreamWriter(new FileStream(sFichier, FileMode.Open, FileAccess.Write));
 
                 sw.WriteLine(CstApplication.NOMBRE_BITS_X * CstApplication.NOMBRE_BITS_Y);
-                sw.WriteLine(lstCoord.Count);
 
                 foreach (CoordDessin cd in lstCoord)
                 {
@@ -97,7 +90,7 @@ namespace TPARCHIPERCEPTRON.DAL
             }
             catch (Exception ex)
             {
-                MessageBox.Show("erreur");
+                MessageBox.Show(ex.Message);
                 return CstApplication.ERREUR;
             }
         }
