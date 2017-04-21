@@ -159,33 +159,26 @@ namespace TPARCHIPERCEPTRON
                     _langueCourante = (ToolStripMenuItem)e.ClickedItem;
 
                     CultureInfo c = (CultureInfo)e.ClickedItem.Tag;
-                    ChangerLangue(c);
+
+                    Thread.CurrentThread.CurrentUICulture = c;
+                    Thread.CurrentThread.CurrentCulture = c;
+                    ComponentResourceManager res = new ComponentResourceManager(typeof(frmAnalyseEcriture));
+                    res.ApplyResources(this, "$this", c);
+                    foreach (ToolStripMenuItem i in mnuPrincipal.Items)
+                        res.ApplyResources(i, i.Name, c);
+
+                    foreach (Control con in this.Controls)
+                        ChangerLangue(con, c, res);
                     _changementLangueCourante = false;
                 }
             }
         }
-        private void ChangerLangue(CultureInfo cul)
+        private void ChangerLangue(Control con, CultureInfo cul, ComponentResourceManager res)
         {
-            Thread.CurrentThread.CurrentUICulture = cul;
-            Thread.CurrentThread.CurrentCulture = cul;
-
-            ComponentResourceManager res = new ComponentResourceManager(typeof(frmAnalyseEcriture));
-            res.ApplyResources(this, "$this", cul);
-            foreach (Control con in this.Controls)
+            res.ApplyResources(con, con.Name, cul);
+            foreach (Control con2 in con.Controls)
             {
-                res.ApplyResources(con, con.Name, cul);
-                foreach (Control con2 in con.Controls)
-                {
-                    res.ApplyResources(con2, con2.Name, cul);
-                }
-                if (con.GetType() == mnuPrincipal.GetType())
-                {
-                    foreach (var item in ((MenuStrip)con).Items)
-                    {
-                        res.ApplyResources(item, ((ToolStripMenuItem)item).Name, cul);
-
-                    }
-                }
+                ChangerLangue(con2, cul, res);
             }
         }
     }

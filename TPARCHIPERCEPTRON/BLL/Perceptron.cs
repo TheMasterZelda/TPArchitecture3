@@ -67,9 +67,9 @@ namespace TPARCHIPERCEPTRON.BLL
                 }
 
                 iNbIterration++;
-            } while (iNbErreur != 0 && iNbIterration < 1000);
+            } while (iNbErreur != 0 && iNbIterration < CstApplication.MAXITERATION);
 
-           resultat += $"Le pourcentage de réussite est de {((double)(lstCoord.Count - iNbErreur) / (double)(lstCoord.Count * 100.0d)) * 10000} pour {Reponse}\r\n";
+           resultat += $"Le pourcentage de réussite est de {((double)(lstCoord.Count - iNbErreur) / (double)(lstCoord.Count * 100.0d)) * 10000.0d} pour {Reponse} avec {iNbIterration} iterration et {iNbErreur} erreur\r\n";
 
             return resultat;
         }
