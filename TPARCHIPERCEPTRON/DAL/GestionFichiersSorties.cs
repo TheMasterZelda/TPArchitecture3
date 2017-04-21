@@ -17,11 +17,15 @@ namespace TPARCHIPERCEPTRON.DAL
     public class GestionFichiersSorties
     {
         private List<CoordDessin> _lstCoord;
+        private List<CoordDessin> _lstYann;
+        private bool _yann;
         private int _source;
 
         public GestionFichiersSorties(int source)
         {
             _source = source;
+            IdxReader idx = new IdxReader();
+            _lstYann = idx.Extract();
         }
         /// <summary>
         /// Permet d'extraire un fichier texte dans une matrice pour l'apprentissage automatique.
@@ -190,8 +194,33 @@ namespace TPARCHIPERCEPTRON.DAL
         /// </summary>
         public IList<CoordDessin> ObtenirCoordonnees()
         {
+            if (_yann)
+            {
+                List<CoordDessin> lstCoordYann = new List<CoordDessin>();
+                lstCoordYann.AddRange(_lstYann);
+                lstCoordYann.AddRange(_lstCoord);
+                return lstCoordYann;
+            }
+            else
+            {
+                List<CoordDessin> lstCoord = new List<CoordDessin>();
+                lstCoord.AddRange(_lstCoord);
+                return lstCoord;
 
+            }
+        }
+
+        /// <summary>
+        /// Retourne la liste des dessins locaux, pas ceux de la base de données Yann.
+        /// </summary>
+        public IList<CoordDessin> ObtenirCoordonneesOriginale()
+        {
             return _lstCoord;
+        }
+
+        public void SetYann(bool state)
+        {
+            _yann = state;
         }
 
 

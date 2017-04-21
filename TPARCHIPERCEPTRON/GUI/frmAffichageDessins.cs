@@ -93,10 +93,14 @@ namespace TPARCHIPERCEPTRON
         {
             listeImage.Images.Clear();
             lvDessins.Items.Clear();
-
+            int count = 0;
             List<Bitmap> images = new List<Bitmap>();
             foreach (CoordDessin item in GestionnairePerceptron.ObtenirCoordonnees())
             {
+                // Pour éviter de freeze si trop grand nombre
+                if (++count >= 1000)
+                    break;
+                
                 Bitmap bitmap = CreerImageBitArray(item.BitArrayDessin);
                 images.Add(bitmap);
                 listeImage.Images.Add(bitmap);

@@ -50,7 +50,7 @@ namespace TPARCHIPERCEPTRON.BLL
         public int SauvegarderCoordonnees()
         {
             //À COMPLÉTER
-            List<CoordDessin> lstCoord = ObtenirCoordonnees() as List<CoordDessin>;
+            List<CoordDessin> lstCoord = _gestionSortie.ObtenirCoordonneesOriginale() as List<CoordDessin>;
             int erreur = _gestionSortie.SauvegarderCoordonnees(lstCoord);
             return erreur;
         }
@@ -75,7 +75,10 @@ namespace TPARCHIPERCEPTRON.BLL
             {
                 sConsole += c.Value.Entrainement(lstCoord);
             }
-            _gestionSortie.SauvegarderCoordonnees(lstCoord);
+            // Pour ne pas enregistrer la base de donnée de Yann
+            List<CoordDessin> lst = _gestionSortie.ObtenirCoordonneesOriginale() as List<CoordDessin>;
+            lst.Add(coordo);
+            _gestionSortie.SauvegarderCoordonnees(lst);
             return sConsole;
         }
 
@@ -108,6 +111,11 @@ namespace TPARCHIPERCEPTRON.BLL
         public IList<CoordDessin> ObtenirCoordonnees()
         {
             return _gestionSortie.ObtenirCoordonnees();
+        }
+
+        public void SetYann(bool state)
+        {
+            _gestionSortie.SetYann(state);
         }
     }
 }

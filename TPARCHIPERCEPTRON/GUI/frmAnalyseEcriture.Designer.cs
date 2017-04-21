@@ -44,6 +44,7 @@
             this.mnuPrincipal = new System.Windows.Forms.MenuStrip();
             this.tsmiLangue = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAfficherDessins = new System.Windows.Forms.ToolStripMenuItem();
+            this.ckbYann = new System.Windows.Forms.CheckBox();
             this.grpEntrainement.SuspendLayout();
             this.grpDessinEntrainement.SuspendLayout();
             this.grpTests.SuspendLayout();
@@ -150,11 +151,19 @@
             resources.ApplyResources(this.tsmiAfficherDessins, "tsmiAfficherDessins");
             this.tsmiAfficherDessins.Click += new System.EventHandler(this.tsmiAfficherDessins_Click);
             // 
+            // ckbYann
+            // 
+            resources.ApplyResources(this.ckbYann, "ckbYann");
+            this.ckbYann.Name = "ckbYann";
+            this.ckbYann.UseVisualStyleBackColor = true;
+            this.ckbYann.CheckedChanged += new System.EventHandler(this.ckbYann_CheckedChanged);
+            // 
             // frmAnalyseEcriture
             // 
             this.AcceptButton = this.btnEntrainement;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ckbYann);
             this.Controls.Add(this.grpTests);
             this.Controls.Add(this.grpEntrainement);
             this.Controls.Add(this.grpDessinEntrainement);
@@ -195,6 +204,7 @@
         private System.Windows.Forms.MenuStrip mnuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem tsmiLangue;
         private System.Windows.Forms.ToolStripMenuItem tsmiAfficherDessins;
+        private System.Windows.Forms.CheckBox ckbYann;
     }
 }
 

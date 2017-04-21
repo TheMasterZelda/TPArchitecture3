@@ -187,5 +187,10 @@ namespace TPARCHIPERCEPTRON
                 ChangerLangue(con2, cul, res);
             }
         }
+
+        private void ckbYann_CheckedChanged(object sender, EventArgs e)
+        {
+            _gcpAnalyseEcriture.SetYann(ckbYann.Checked);
+        }
     }
 }

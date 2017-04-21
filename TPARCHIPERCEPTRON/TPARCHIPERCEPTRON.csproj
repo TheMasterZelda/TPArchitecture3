@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\IdxReader.cs" />
     <Compile Include="Data\Database_Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -143,6 +144,10 @@
     <None Include="Data\Database_Model.edmx.diagram">
       <DependentUpon>Database_Model.edmx</DependentUpon>
     </None>
+    <None Include="Data\t10k-images.idx3-ubyte" />
+    <None Include="Data\t10k-labels.idx1-ubyte" />
+    <None Include="Data\train-images.idx3-ubyte" />
+    <None Include="Data\train-labels.idx1-ubyte" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
