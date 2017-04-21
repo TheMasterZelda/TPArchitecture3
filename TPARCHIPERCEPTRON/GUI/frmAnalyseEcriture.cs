@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using TPARCHIPERCEPTRON.BLL;
 using System.Threading;
+using TPARCHIPERCEPTRON.GUI;
 
 namespace TPARCHIPERCEPTRON
 {
@@ -37,12 +38,17 @@ namespace TPARCHIPERCEPTRON
         /// </summary>
         public frmAnalyseEcriture()
         {
+
+            frmSourceDonnees data = new frmSourceDonnees();
+            data.ShowDialog();
+            int source = data.SourceDonnees();
+
             InitializeComponent();
 
             ucDessin.Width = CstApplication.TAILLEDESSINX;
             ucDessin.Height = CstApplication.TAILLEDESSINY;
 
-            _gcpAnalyseEcriture = new GestionClassesPerceptrons();
+            _gcpAnalyseEcriture = new GestionClassesPerceptrons(source);
             //À COMPLÉTER   
             _gcpAnalyseEcriture.ChargerCoordonnees();
         }

@@ -18,10 +18,10 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <summary>
         /// Constructeur
         /// </summary>
-        public GestionClassesPerceptrons()
+        public GestionClassesPerceptrons(int source)
         {
             _lstPerceptrons = new Dictionary<string, Perceptron>();
-            _gestionSortie = new GestionFichiersSorties();
+            _gestionSortie = new GestionFichiersSorties(source);
 
             //À COMPLÉTER
             ChargerCoordonnees();
