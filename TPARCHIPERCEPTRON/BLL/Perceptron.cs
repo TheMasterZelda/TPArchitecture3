@@ -98,14 +98,19 @@ namespace TPARCHIPERCEPTRON.BLL
         /// <returns></returns>
         public bool TesterNeurone(CoordDessin coord)
         {
-            double sum = _poidsSyn[0];
-
-            for (int i = 1; i < _poidsSyn.Length; i++)
+            if (_poidsSyn != null)
             {
-                sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.FAUX : CstApplication.VRAI);
-            }
+                double sum = _poidsSyn[0];
 
-            return (sum >= 0) ? false : true;
+                for (int i = 1; i < _poidsSyn.Length; i++)
+                {
+                    sum += _poidsSyn[i] * (coord.BitArrayDessin[i - 1] ? CstApplication.FAUX : CstApplication.VRAI);
+                }
+
+                return (sum >= 0) ? false : true;
+            }
+            else
+                return false;
         }
 
     }
